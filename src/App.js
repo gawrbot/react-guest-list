@@ -135,29 +135,31 @@ function App() {
           event.preventDefault();
         }}
       >
-        <label htmlFor="First name">First Name</label>
-        <input
-          css={nameInputFields}
-          id="First name"
-          value={firstName}
-          disabled={loading}
-          onChange={(event) => {
-            setFirstName(event.currentTarget.value);
-          }}
-        />
-        <label htmlFor="Last name">Last Name</label>
-        <input
-          css={nameInputFields}
-          id="Last name"
-          value={lastName}
-          disabled={loading}
-          onChange={(event) => {
-            setLastName(event.currentTarget.value);
-          }}
-          onKeyPress={async (event) =>
-            event.key === 'Enter' ? await createGuest() : null
-          }
-        />
+        <label>
+          First Name
+          <input
+            css={nameInputFields}
+            value={firstName}
+            disabled={loading}
+            onChange={(event) => {
+              setFirstName(event.currentTarget.value);
+            }}
+          />
+        </label>
+        <label>
+          Last Name
+          <input
+            css={nameInputFields}
+            value={lastName}
+            disabled={loading}
+            onChange={(event) => {
+              setLastName(event.currentTarget.value);
+            }}
+            onKeyPress={async (event) =>
+              event.key === 'Enter' ? await createGuest() : null
+            }
+          />
+        </label>
       </form>
       <p>Press enter to submit your guest</p>
       {/* GUEST LIST  */}
