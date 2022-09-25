@@ -137,7 +137,7 @@ function App() {
       >
         <input
           css={nameInputFields}
-          aria-label="First Name"
+          aria-label="First name"
           value={firstName}
           placeholder="First Name"
           disabled={loading}
@@ -147,7 +147,7 @@ function App() {
         />
         <input
           css={nameInputFields}
-          aria-label="Last Name"
+          aria-label="Last name"
           value={lastName}
           placeholder="Last Name"
           disabled={loading}
@@ -174,7 +174,7 @@ function App() {
               {/* Attendance Checkbox */}
               <div>
                 <input
-                  aria-label={`Attending Status of ${guest.firstName} ${guest.lastName}`}
+                  aria-label={`attending status of ${guest.firstName} ${guest.lastName}`}
                   checked={guest.attending}
                   type="checkbox"
                   onChange={async (event) => {
