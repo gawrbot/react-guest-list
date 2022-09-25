@@ -93,7 +93,6 @@ function App() {
     console.log('Your guest has been ADDED to the list:', data);
     setFirstName('');
     setLastName('');
-    await getAllGuests();
   }
 
   // Update a guests status from 'not attending' to 'attending' on checkbox change (checked = attending, unchecked = not attending)
@@ -108,7 +107,6 @@ function App() {
     const updatedGuest = await response.json();
     console.log('Your guest is set to ATTENDING now:', updatedGuest);
     // Get all guests again after setting one to 'attending'
-    await getAllGuests();
   }
 
   // Update a guests status from 'attending' to 'not attending' on checkbox change (checked = attending, unchecked = not attending)
@@ -123,7 +121,6 @@ function App() {
     const updatedGuest = await response.json();
     console.log('Your guest is set to NOT attending now:', updatedGuest);
     // Get all guests again after setting one to 'attending'
-    await getAllGuests();
   }
 
   return (
@@ -196,8 +193,6 @@ function App() {
                 css={removeButtons}
                 onClick={async () => {
                   await deleteGuest(guest.id);
-                  // Get all guests again after deleting one
-                  await getAllGuests();
                 }}
               >
                 Remove
