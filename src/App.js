@@ -135,21 +135,21 @@ function App() {
           event.preventDefault();
         }}
       >
+        <label htmlFor="First name">First Name</label>
         <input
           css={nameInputFields}
-          aria-label="First name"
+          id="First name"
           value={firstName}
-          placeholder="First Name"
           disabled={loading}
           onChange={(event) => {
             setFirstName(event.currentTarget.value);
           }}
         />
+        <label htmlFor="Last name">Last Name</label>
         <input
           css={nameInputFields}
-          aria-label="Last name"
+          id="Last name"
           value={lastName}
-          placeholder="Last Name"
           disabled={loading}
           onChange={(event) => {
             setLastName(event.currentTarget.value);
