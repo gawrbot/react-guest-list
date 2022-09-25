@@ -136,7 +136,7 @@ function App() {
         }}
       >
         <label>
-          First Name
+          First name
           <input
             css={nameInputFields}
             value={firstName}
@@ -147,7 +147,7 @@ function App() {
           />
         </label>
         <label>
-          Last Name
+          Last name
           <input
             css={nameInputFields}
             value={lastName}
