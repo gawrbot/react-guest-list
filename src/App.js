@@ -108,7 +108,6 @@ function App() {
       body: JSON.stringify({ attending: true }),
     });
     const updatedGuest = await response.json();
-    console.log('Your guest is set to ATTENDING now:', updatedGuest);
     setGuests(
       guests.map((guest) =>
         guest.id === updatedGuest.id
@@ -116,6 +115,7 @@ function App() {
           : guest,
       ),
     );
+    console.log('Your guest is set to ATTENDING now:', updatedGuest);
   }
 
   // Update a guests status from 'attending' to 'not attending' on checkbox change (checked = attending, unchecked = not attending)
@@ -128,7 +128,6 @@ function App() {
       body: JSON.stringify({ attending: false }),
     });
     const updatedGuest = await response.json();
-    console.log('Your guest is set to NOT attending now:', updatedGuest);
     setGuests(
       guests.map((guest) =>
         guest.id === updatedGuest.id
@@ -136,6 +135,7 @@ function App() {
           : guest,
       ),
     );
+    console.log('Your guest is set to NOT attending now:', updatedGuest);
   }
 
   // Delete a guest from the guest list
@@ -144,11 +144,11 @@ function App() {
       method: 'DELETE',
     });
     const deletedGuest = await response.json();
-    console.log('Your guest has been DELETED from the list:', deletedGuest);
     const guestRest = guests.filter((guest) => {
       return guest.id !== deletedGuest.id;
     });
     setGuests(guestRest);
+    console.log('Your guest has been DELETED from the list:', deletedGuest);
   }
 
   return (
