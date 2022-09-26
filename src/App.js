@@ -9,6 +9,7 @@ const heading = css`
 
 const nameInputFields = css`
   margin-right: 10px;
+  margin-left: 10px;
   width: 200px;
   transition: 180ms width ease-in-out;
   :focus {
@@ -26,7 +27,12 @@ const yourGuestsBox = css`
 const guestItem = css`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  width: 400px;
+  width: auto;
+  align-items: center;
+  padding: 5px;
+  :nth-child(even) {
+    background: #ccc;
+  }
   div {
     font-weight: 200;
   }
@@ -38,12 +44,17 @@ const removeButtons = css`
   border: 0.5px solid grey;
   border-radius: 2px;
   width: 80px;
-  transition: 180ms width ease-in-out;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  transition: 300ms ease-in-out;
   transition: font-weight ease-in-out;
+  transition: color ease-in-out;
+
   :hover {
-    background-color: lightcoral;
-    width: 90px;
+    background-color: red;
+    transform: scale(1.4);
     font-weight: 400;
+    color: white;
   }
 `;
 
@@ -70,15 +81,6 @@ function App() {
     getAllGuests().catch(() => {});
   }, []);
 
-  // Delete a guest from the guest list
-  async function deleteGuest(id) {
-    const response = await fetch(`${baseUrl}/${id}`, {
-      method: 'DELETE',
-    });
-    const deletedGuest = await response.json();
-    console.log('Your guest has been DELETED from the list:', deletedGuest);
-  }
-
   // Store new guest in API
   async function createGuest() {
     const response = await fetch(baseUrl, {
@@ -93,6 +95,7 @@ function App() {
     console.log('Your guest has been ADDED to the list:', data);
     setFirstName('');
     setLastName('');
+    setGuests([...guests, data]);
   }
 
   // Update a guests status from 'not attending' to 'attending' on checkbox change (checked = attending, unchecked = not attending)
@@ -106,7 +109,13 @@ function App() {
     });
     const updatedGuest = await response.json();
     console.log('Your guest is set to ATTENDING now:', updatedGuest);
-    // Get all guests again after setting one to 'attending'
+    setGuests(
+      guests.map((guest) =>
+        guest.id === updatedGuest.id
+          ? Object.assign(guest, { attending: true })
+          : guest,
+      ),
+    );
   }
 
   // Update a guests status from 'attending' to 'not attending' on checkbox change (checked = attending, unchecked = not attending)
@@ -120,7 +129,26 @@ function App() {
     });
     const updatedGuest = await response.json();
     console.log('Your guest is set to NOT attending now:', updatedGuest);
-    // Get all guests again after setting one to 'attending'
+    setGuests(
+      guests.map((guest) =>
+        guest.id === updatedGuest.id
+          ? Object.assign(guest, { attending: false })
+          : guest,
+      ),
+    );
+  }
+
+  // Delete a guest from the guest list
+  async function deleteGuest(id) {
+    const response = await fetch(`${baseUrl}/${id}`, {
+      method: 'DELETE',
+    });
+    const deletedGuest = await response.json();
+    console.log('Your guest has been DELETED from the list:', deletedGuest);
+    const guestRest = guests.filter((guest) => {
+      return guest.id !== deletedGuest.id;
+    });
+    setGuests(guestRest);
   }
 
   return (
